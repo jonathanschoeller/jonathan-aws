@@ -1,0 +1,7 @@
+Description: ECS Cluster for Jonathan's AWS Account
+
+Resources:
+  FargateCluster:
+    Type: AWS::ECS::Cluster
+    Properties: 
+      ClusterName: jonathans-cluster

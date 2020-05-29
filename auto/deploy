@@ -1,0 +1,14 @@
+#!/bin/bash -e
+
+aws_region="us-east-1"
+
+aws --region $aws_region \
+    cloudformation deploy \
+    --template-file deploy/jonathan-aws-iam.yml \
+    --stack-name jonathan-aws-iam \
+    --capabilities CAPABILITY_NAMED_IAM
+
+aws --region $aws_region \
+    cloudformation deploy \
+    --template-file deploy/jonathan-aws-ecs.yml \
+    --stack-name jonathan-aws-ecs

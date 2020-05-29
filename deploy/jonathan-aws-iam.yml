@@ -1,0 +1,27 @@
+Description: IAM Roles for Jonathan's AWS Account
+
+Resources:
+  ManageCloudFormationPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: 'manage-cloudformation'
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Action:
+          - cloudformation:*
+          Resource: "*"
+
+  PublishEcrPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: 'publish-ecr'
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action: 
+              - 'ecr:GetAuthorizationToken'
+              - 'ecr:InitiateLayerUpload'
+            Resource: '*'
