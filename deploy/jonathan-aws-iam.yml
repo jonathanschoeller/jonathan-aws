@@ -55,4 +55,31 @@ Resources:
             Action:
               - 'iam:GetRole'
               - 'iam:CreateRole'
+              - 'iam:AttachRolePolicy'
+              - 'iam:DetachRolePolicy'
+              - 'iam:PassRole'
             Resource: '*'
+
+  CloudwatchPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: 'manage-cloudwatch-logs'
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - 'logs:*'
+            Resource: '*'
+
+  EC2Policy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: 'manage-ec2'
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Action:
+          - 'ec2:DescribeSecurityGroups'
+          Resource: "*"
