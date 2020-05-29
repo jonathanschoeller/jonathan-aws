@@ -30,3 +30,29 @@ Resources:
               - 'ecr:UploadLayerPart'
               - 'ecr:CompleteLayerUpload'
             Resource: '*'
+
+  CreateEcsTaskPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: 'create-ecs-task'
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action: 
+              - 'ecs:RegisterTaskDefinition'
+              - 'ecs:DeregisterTaskDefinition'
+            Resource: '*'
+
+  GetIamRolePolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: 'get-iam-role'
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - 'iam:GetRole'
+              - 'iam:CreateRole'
+            Resource: '*'
