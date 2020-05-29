@@ -1,85 +1,90 @@
 Description: IAM Roles for Jonathan's AWS Account
 
 Resources:
-  ManageCloudFormationPolicy:
+  BuildAgentPolicy:
     Type: AWS::IAM::ManagedPolicy
     Properties:
-      ManagedPolicyName: 'manage-cloudformation'
-      PolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-        - Effect: Allow
-          Action:
-          - cloudformation:*
-          Resource: "*"
-
-  PublishEcrPolicy:
-    Type: AWS::IAM::ManagedPolicy
-    Properties:
-      ManagedPolicyName: 'publish-ecr'
-      PolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-          - Effect: Allow
-            Action: 
-              - 'ecr:GetAuthorizationToken'
-              - 'ecr:GetDownloadUrlForLayer'
-              - 'ecr:BatchCheckLayerAvailability'
-              - 'ecr:PutImage'
-              - 'ecr:InitiateLayerUpload'
-              - 'ecr:UploadLayerPart'
-              - 'ecr:CompleteLayerUpload'
-            Resource: '*'
-
-  CreateEcsTaskPolicy:
-    Type: AWS::IAM::ManagedPolicy
-    Properties:
-      ManagedPolicyName: 'create-ecs-task'
-      PolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-          - Effect: Allow
-            Action: 
-              - 'ecs:RegisterTaskDefinition'
-              - 'ecs:DeregisterTaskDefinition'
-            Resource: '*'
-
-  GetIamRolePolicy:
-    Type: AWS::IAM::ManagedPolicy
-    Properties:
-      ManagedPolicyName: 'get-iam-role'
+      ManagedPolicyName: 'BuildAgent'
       PolicyDocument:
         Version: '2012-10-17'
         Statement:
           - Effect: Allow
             Action:
-              - 'iam:GetRole'
-              - 'iam:CreateRole'
-              - 'iam:AttachRolePolicy'
-              - 'iam:DetachRolePolicy'
-              - 'iam:PassRole'
-            Resource: '*'
-
-  CloudwatchPolicy:
-    Type: AWS::IAM::ManagedPolicy
-    Properties:
-      ManagedPolicyName: 'manage-cloudwatch-logs'
-      PolicyDocument:
-        Version: '2012-10-17'
-        Statement:
+              - autoscaling:*
+              - application-autoscaling:*
+              - cloudwatch:*
+              - events:*
+              - ec2:*
+              - elasticache:*
+              - elasticloadbalancing:*
+              - route53:*
+              - s3:*
+              - glue:*
+              - lambda:*
+              - apigateway:*
+              - sns:*
+              - ecr:*
+              - "cloudfront:*"
+              - eks:*
+              - "ecs:*"
+              - "sqs:*"
+              - "rds:*"
+              - "logs:*"
+              - "kinesis:*"
+              - "kms:*"
+              - "firehose:*"
+              - "dynamodb:*"
+              - "es:*"
+              - "ssm:*"
+              - "waf:*"
+              - "waf-regional:*"
+              - "secretsmanager:*"
+              - "states:*"
+              - "acm:*"
+            Resource: "*"
           - Effect: Allow
-            Action:
-              - 'logs:*'
+            Action: 
+              - "cloudformation:CancelUpdateStack"
+              - "cloudformation:CreateStack"
+              - "cloudformation:Describe*"
+              - "cloudformation:EstimateTemplateCost"
+              - "cloudformation:GetTemplate"
+              - "cloudformation:GetTemplateSummary"
+              - "cloudformation:List*"
+              - "cloudformation:UpdateStack"
+              - "cloudformation:ValidateTemplate"
+              - "cloudformation:SetStackPolicy"
+              - "cloudformation:*ChangeSet"
+              - "cloudformation:DeleteStack"
             Resource: '*'
-
-  EC2Policy:
-    Type: AWS::IAM::ManagedPolicy
-    Properties:
-      ManagedPolicyName: 'manage-ec2'
-      PolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-        - Effect: Allow
-          Action:
-          - 'ec2:DescribeSecurityGroups'
-          Resource: "*"
+          - Effect: Allow
+            Action: 
+              - "iam:AddRoleToInstanceProfile"
+              - "iam:CreateInstanceProfile"
+              - "iam:CreateRole"
+              - "iam:DeleteInstanceProfile"
+              - "iam:DeleteRolePolicy"
+              - "iam:DeleteRole"
+              - "iam:GetRole"
+              - "iam:GetRolePolicy"
+              - "iam:ListInstanceProfilesForRole"
+              - "iam:ListRolePolicies"
+              - "iam:PassRole"
+              - "iam:PutRolePolicy"
+              - "iam:RemoveRoleFromInstanceProfile"
+              - "iam:UpdateAssumeRolePolicy"
+              - "iam:GetInstanceProfile"
+              - "iam:DetachRolePolicy"
+              - "iam:CreatePolicy"
+              - "iam:AttachRolePolicy"
+              - "iam:GetPolicy"
+              - "iam:ListPolicyVersions"
+              - "iam:CreateGroup"
+              - "iam:DeleteGroup"
+              - "iam:AttachGroupPolicy"
+              - "iam:DetachGroupPolicy"
+              - "iam:CreatePolicyVersion"
+              - "iam:DeletePolicyVersion"
+              - "iam:TagRole"
+              - "iam:UntagRole"
+            Resource: '*'
