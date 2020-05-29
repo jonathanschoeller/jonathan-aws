@@ -12,3 +12,8 @@ aws --region $aws_region \
     cloudformation deploy \
     --template-file deploy/jonathan-aws-ecs.yml \
     --stack-name jonathan-aws-ecs
+
+aws --region $aws_region \
+    cloudformation deploy \
+    --template-file deploy/jonathan-aws-ecr.yml \
+    --stack-name jonathan-aws-ecr
